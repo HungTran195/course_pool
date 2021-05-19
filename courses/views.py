@@ -34,14 +34,11 @@ class RegisterPage(FormView):
 
     def form_valid(self, form):
         user = form.save()
-        print('  user', user)
         if user is not None:
-            print('  success', user)
             login(self.request, user)
         return super(RegisterPage, self).form_valid(form)
 
     def get(self, *args, **kwargs):
-        print('  gettt')
         if self.request.user.is_authenticated:
             return redirect('courses:index')
         return super(RegisterPage, self).get(*args, **kwargs)
