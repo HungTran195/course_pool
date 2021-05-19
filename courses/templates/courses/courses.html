@@ -1,0 +1,65 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="">
+    <!-- Slogan -->
+    <div class="slogan text-light">
+        <div class="slogan-container">
+            <h1>No Need to Pay</h1>
+            <p>We have some great free courses for you!</p>
+        </div>
+    </div>
+
+    <!-- Search bar -->
+    <div class=" my-2 mb-3 search-bar ">
+        <form class="input-group" action="#">
+            <input class="form-control rounded-start" type="text" name="search-bar" placeholder="python, c++ ...">
+            <button class="btn-outline-light bg-info text-dark rounded-end" type="submit"><i
+                    class="fas fa-search px-2"></i></button>
+        </form>
+    </div>
+
+    <!-- Main content -->
+    <div class="d-flex justify-content-center align-items-center ">
+        <div class="container grid-view">
+            {% for course in courses %}
+            <div class="course-card position-relative ">
+                <a class="img-course" href="{{course.url}}">
+                    <img src="{{course.thumbnail_url}}" alt="Course Image">
+                </a>
+                <div class="keyword-list">
+                    <ul class="d-flex flex-wrap mt-1 mx-auto">
+                        {% for key in course.get_keywords%}
+                        <li><a href="">{{key}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="course-name">{{course.course_name}}</div>
+                <div class="author">by <span class="author-name">{{course.author}}</span></div>
+                <div class="description">
+                    <p>{{course.description}}</p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center my-3">
+                    <div class='position-absolute bottom-0 my-1 d-flex align-items-center  w-100'>
+                        <a class="ms-3" href="{{course.url}}">
+                            <button type="button" class="btn btn-info">Learn More</button>
+                        </a>
+                        <a class="ms-3" href="">
+                            <button type="button" class="btn btn-info">Share <i class="fas fa-share-alt"></i></button>
+                        </a>
+                        {% if is_favorite %}
+                        <a class="text-warning ms-auto me-3" href=""><i class=" fas fa-star fa-2x"></i></a>
+                        {% else %}
+                        <a class="text-warning ms-auto me-3" href=""><i class=" far fa-star fa-2x"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</main>
+
+{% endblock %}

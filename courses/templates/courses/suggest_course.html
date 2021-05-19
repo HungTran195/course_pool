@@ -1,0 +1,82 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <div class="slogan text-light">
+        <div class="slogan-container">
+            <h1 class="mb-3">Share your course</h1>
+            <p class="fs-5">Your submission will be carefully reviewed and only published once it has passed the
+                verification </p>
+        </div>
+    </div>
+    <div class="container">
+        <div id="forms" class="my-3 mx-3">
+            <!-- Form -->
+            <form role="form mx-auto" method='POST' action="{% url 'courses:suggest_course' %}">{% csrf_token %}
+                <div class="input-group row mb-2 mb-lg-4">
+                    <label
+                        class="col-2 form-label form-control-label text-light justify-content-end align-items-center d-lg-flex ">Name</label>
+                    <div class="col-md-4">
+                        <input class="form-control mb-2" type="text" name="name" placeholder="James">
+                    </div>
+                    <label
+                        class="col-2 col-form-label form-control-label text-light justify-content-end align-items-center d-lg-flex">Email</label>
+                    <div class="col-md-4">
+                        <input class="form-control mb-lg-2" type="text" name="email" placeholder="email@gmail.com">
+                    </div>
+                </div>
+                <div class="input-group row mb-2 mb-lg-4">
+                    <label
+                        class="col-lg-2 col-form-label form-control-label  justify-content-end align-items-center d-lg-flex text-light ">Course
+                        Name</label>
+                    <div class="col-lg">
+                        <input class="form-control" type="text" name="course_name"
+                            placeholder="Django from zero to hero" required>
+                    </div>
+                </div>
+                <div class="input-group row mb-2 mb-lg-4">
+                    <label
+                        class="col-lg-2 col-form-label form-control-label text-light justify-content-end align-items-center d-lg-flex">Course
+                        URL</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" name="course_url" type="text" required>
+                    </div>
+                </div>
+                <div class="input-group row mb-2 mb-lg-4">
+                    <label
+                        class="col-lg-2 col-form-label form-control-label text-light justify-content-end align-items-center d-lg-flex">Tags</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" placeholder="Python, JavaScript, ..." required
+                            name="tags">
+                    </div>
+                </div>
+                <div class="input-group row mb-2 mb-lg-4">
+                    <label
+                        class="col-lg-2 col-form-label form-control-label text-light justify-content-end align-items-center d-lg-flex">Description</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" name="description" required
+                            placeholder="This course will give you a full introduction into all of the core concepts in python.">
+                    </div>
+                </div>
+                <div class="input-group row mb-2 mb-lg-4">
+                    <label class="col-lg-2 col-form-label form-control-label"></label>
+                    <div class="col-lg-10">
+                        <input type="reset" class="btn btn-outline-secondary mr-2" value="Cancel">
+                        <input type="submit" class="btn btn-primary mr-2" name="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
+    <script src="https://kit.fontawesome.com/da72a545a2.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/css/style.css' %}">
+
+    <title>{% block title %}Course Pool{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Navbar container -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fs-5">
+        <a class="navbar-brand flex-shrink-0 order-md-1 fs-2 fw-bolder ms-2" href="{% url 'courses:index' %}">Course
+            Pool</a>
+
+        <button class="navbar-toggler ms-auto order-md-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Account -->
+        <div class="order-md-4 mx-2 dropdown ">
+            <a href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fas fa-user-circle fa-2x text-white-50"></i></a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                {% if request.user.is_authenticated %}
+                <li><a class="dropdown-item" href="#">{{request.user}}</a></li>
+                <li><a class="dropdown-item" href="{% url 'courses:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'courses:login' %}">Login</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <!-- Main Menu -->
+        <div class="collapse navbar-collapse order-md-2 ms-2" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class=" nav-item ">
+                    <a class=" nav-link navbar-text" id="home" href="{% url 'courses:index' %}">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link navbar-text " id='favorite' href="{% url 'courses:favorite' %}">Favorite</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link navbar-text " id="suggest" href="{% url 'courses:suggest_course' %}">Suggest a
+                        Course</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script> -->
+
+    <script src="{% static 'courses/js/script.js' %}"></script>
+    <script src="{% static 'courses/js/bootstrap.min.js' %}"></script>
+
+
+
+
+</body>
+
+
+</html>
