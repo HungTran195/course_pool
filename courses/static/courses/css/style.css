@@ -156,7 +156,7 @@ main.dark-mode{
     box-shadow: 5px 5px 5px #727b80;
 
 }
-
+ 
 .course-card.dark-mode .course-name {
     color: #fff;
 }
@@ -188,7 +188,9 @@ main.dark-mode{
     .courses-container {
         margin: 0;
     }
-    
+    .grid-view {
+        grid-gap: 1.5rem;
+    }
   
   
 }

@@ -9,12 +9,12 @@ app_name = 'courses'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('suggest_course', views.suggest_course, name='suggest_course'),
+    path('search', views.search_course, name='search_course'),
+    path('category/<str:key>', views.category, name='category'),
+    path('toggle_favorite', views.toggle_favorite, name='toggle_favorite'),
     path('favorite', views.show_favorite, name='favorite'),
+    path('suggest_course', views.suggest_course, name='suggest_course'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='courses:login'), name='logout'),
     path('register/', RegisterPage.as_view(), name='register'),
-
-
-
 ]

@@ -18,7 +18,7 @@
     <!-- Main content -->
     <div class="d-flex justify-content-center align-items-center ">
         <div class="container grid-view">
-            {% for course in courses %}
+            {% for course in favorite_courses %}
             <div class="course-card position-relative ">
                 <a class="img-course" href="{{course.url}}">
                     <img src="{{course.thumbnail_url}}" alt="Course Image">
@@ -35,10 +35,21 @@
                 <div class="description">
                     <p>{{course.description}}</p>
                 </div>
+
                 <div class="d-flex justify-content-center align-items-center my-3">
-                    <a class='position-absolute bottom-0 my-1' href="{{course.url}}">
-                        <button type="button" class="btn btn-info">Learn More</button>
-                    </a>
+                    <div class='position-absolute bottom-0 my-2 d-flex align-items-center  w-100'>
+                        <a class="ms-3" href="{{course.url}}">
+                            <button type="button" class="btn btn-info">Learn More</button>
+                        </a>
+                        <a class="ms-3" href="">
+                            <button type="button" class="btn btn-info">Share <i class="fas fa-share-alt"></i></button>
+                        </a>
+
+                        <div class="text-warning ms-auto me-3 toggle-favorite" id="course-{{course.id}}"><i
+                                class="fas fa-star fa-2x"></i>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             {% endfor %}

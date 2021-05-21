@@ -1,4 +1,4 @@
-from .models import Course
+from .models import Course, Your_Course
 from courses.util import get_thumbnail_url
 from django.shortcuts import render, redirect
 
@@ -8,13 +8,62 @@ from django.contrib.auth.views import LoginView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.db.models import Q
+from django.http import JsonResponse
+import json
 
 
 def index(request):
-    all_courses = Course.objects.all()
+    all_courses = {}
+
+    if request.user.is_authenticated:
+        favorite_id = [c.course_id for c in Your_Course.objects.filter(user=request.user)]
+
+    for course in Course.objects.all():
+        all_courses[course] = False
+        if request.user.is_authenticated:
+            if course.id in favorite_id:
+                all_courses[course] = True
 
     context = {'courses': all_courses}
     return render(request, 'courses/courses.html', context)
+
+
+def search_course(request):
+    keyword = request.GET.get('key')
+    if not keyword.split():
+        all_courses = Course.objects.all()
+        context = {'courses': all_courses}
+        return render(request, 'courses/courses.html', context)
+
+    courses = Course.objects.filter(
+        Q(course_name__icontains=keyword) | Q(keywords__icontains=keyword))
+    context = {'courses': courses, 'keyword': keyword}
+
+    return render(request, 'courses/search.html', context)
+
+
+def category(request, key):
+    if key:
+        courses = Course.objects.filter(keywords__icontains=key)
+        context = {'courses': courses}
+    else:
+        all_courses = Course.objects.all()
+        context = {'courses': all_courses}
+    return render(request, 'courses/courses.html', context)
+
+
+def toggle_favorite(request):
+    # Get data from POST request
+    data_from_post = json.load(request)['course_id']
+    course_id = data_from_post.split('-')[-1]
+    if Your_Course.objects.filter(user=request.user).filter(course_id=course_id):
+        Your_Course.objects.filter(user=request.user).filter(
+            course_id=course_id).delete()
+    else:
+        q = Your_Course(user=request.user, course_id=course_id)
+        q.save()
+    return JsonResponse({})
 
 
 class CustomLoginView(LoginView):
@@ -46,7 +95,9 @@ class RegisterPage(FormView):
 
 @login_required(login_url='courses:login')
 def show_favorite(request):
-    context = {'favorite_courses': 1}
+    favorite_id = [c.course_id for c in Your_Course.objects.filter(user=request.user)]
+    favorite_courses = Course.objects.filter(id__in = favorite_id)
+    context = {'favorite_courses': favorite_courses}
     return render(request, 'courses/favorite.html', context)
 
 
