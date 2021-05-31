@@ -1,22 +1,81 @@
 {% extends 'courses/base.html' %}
+{% load static %}
+
 {% block content %}
+<div class="container text-light mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="login-wrap">
+                <div class=" d-flex justify-content-center mb-3">
+                    <img src="{% static 'courses/img/login.png' %}" alt="Login Logo" id="login-logo">
+                </div>
+                <h2 class="text-center mb-3">Register</h2>
+                <p class="text-center">Sign in by entering the information below</p>
 
-<div class="header-bar">
-    <h1>Register</h1>
+                <form class="form login-form" method="POST">{% csrf_token %}
+                    <div class="row">
+                        <div class="col form-group mb-3">
+                            <input class="form-control ps-1" id="id_first_name" type="text" name="first_name"
+                                placeholder="First name">
+                        </div>
+
+                        <div class="col form-group mb-3">
+                            <input class="form-control ps-1" id="id_last_name" type="text" name="last_name"
+                                placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="fa fa-envelope"></span></div>
+                        <input class="form-control" id="id_email_address" type="text" name="email"
+                            placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="fa fa-lock"></span>
+                        </div>
+                        <input class="form-control" autocomplete="new-password" id="id_password1" type="password"
+                            name="password1" placeholder="Password" aria-autocomplete="list" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="fa fa-lock"></span>
+                        </div>
+                        <input class=" form-control" autocomplete="new-password" id="id_password2" type="password"
+                            name="password2" placeholder="Confirm Password" required>
+                    </div>
+                    {% if form.errors %}
+                    <div class="form-group">
+                        <div class="w-100 d-flex flex-column justify-content-center mb-3 ">
+                            {% if form.errors.get_json_data.username %}
+                            <p class="text-danger py-0">{{form.errors.get_json_data.username.0.message}}</p>
+                            {% else %}
+                            <p class="text-danger py-0">{{form.errors.get_json_data.email.0.message}}</p>
+                            <p class="text-danger py-0">{{form.errors.get_json_data.password2.0.message}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <button type="submit" value="Register"
+                            class="btn form-control btn-primary rounded submit px-3">Sign Up</button>
+                    </div>
+
+                </form>
+                <div class="w-100 text-center mt-4 text">
+                    <p>Already have an account?</p>
+                    <div>
+                        <a href="{% url 'courses:login' %}"><button class="btn btn-primary">Login</button></a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
 </div>
 
-<div class="card-body">
-    <form method="POST">
-        {% csrf_token %}
-        <label for="username">{{form.username.label}}</label>
-        {{form.username}}
-        <label for="username">{{form.password1.label}}</label>
-        {{form.password1}}
-        <label for="username">{{form.password2.label}}</label>
-        {{form.password2}}
-        <input class="button" type="submit" value="register">
-    </form>
-    <p>Already have an account? <a href="{% url 'courses:login' %}">Login</a></p>
-</div>
 
 {% endblock content %}

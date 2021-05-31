@@ -3,7 +3,7 @@
 
 body {
     background-color: #333d46;
-    
+    font-family: 'Open Sans', sans-serif;    
     
 }
 ul {
@@ -168,6 +168,93 @@ main.dark-mode{
     transition: all 0.4s ease;
 }
 
+/* Login form */
+#login-logo {
+    max-width: 100px;
+}
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-wrap {
+    background-color: #000232;
+    padding: 10px;
+    padding: 2rem;
+    border-radius: 6px;
+    max-width: 360px;
+}
+
+.login-wrap p {
+    padding: 10px 0;
+    color: #ccc;
+}
+
+.login-form .form-control {
+    padding-left: 30px;
+}
+.login-form .form-group {
+    position: relative;
+    
+}
+
+.login-form input.form-control{
+    height: 48px;
+    border: none;
+    border-radius: 0;
+    background-color:  #0000000d !important;    
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    border-bottom: 1px solid #b689b0;
+
+}
+.login-form input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0px 1000px #000232 inset;
+    box-shadow: rgba(0, 0, 0, 0.05);
+    transition: background-color 5000s ease-in-out;
+}
+
+.login-form input:-internal-autofill-selected {
+    background-color:  rgba(0, 0, 0, 0.05) !important;
+}
+
+.login-form input.form-control::-webkit-input-placeholder{ 
+    color: #c2c2c2 !important;
+}
+
+
+.login-form input.form-control:focus,
+.login-form input.form-control:active {
+    box-shadow: none;
+}
+
+.form-group .icon {
+    position: absolute;
+    top: 15px;
+    left: 0px;
+}
+
+.login-form a {
+    color: #b689b0;
+}
+
+.login-form a:hover {
+    color: #b771ae;
+}
+
+.login-form .btn.btn-primary {
+    background: #b689b0;
+    border: 1px solid #b689b0 ;
+    color: #fff ;
+}
+
+.login-form .btn.btn-primary:hover {
+    background-color: #b771ae;
+    border-color: #b771ae;
+}
+
 @media (max-width: 768px){
     .active {
         background: none;
@@ -175,10 +262,6 @@ main.dark-mode{
     .search-bar{
         width: 95%;
     }
-}
-
-@media (min-width: 576px){
-
 }
 
 @media (max-width: 575px){
@@ -191,6 +274,4 @@ main.dark-mode{
     .grid-view {
         grid-gap: 1.5rem;
     }
-  
-  
 }
