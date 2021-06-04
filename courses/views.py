@@ -1,6 +1,7 @@
+from django.utils.html import conditional_escape
 from .models import Course, Your_Course
 from courses.util import get_thumbnail_url
-from courses.form import UserCreationForm
+from courses.form import UserCreationForm, SuggestCourseForm
 from django.contrib.auth.models import User
 
 from django.contrib.auth.views import LoginView, PasswordResetView
@@ -105,18 +106,15 @@ def show_favorite(request):
 
 
 def suggest_course(request):
+    # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        email = request.POST.get('email')
-        name = request.POST.get('name')
-        course_name = request.POST.get('course_name')
-        course_url = request.POST.get('course_url')
-        tags = request.POST.get('tags')
-        description = request.POST.get('description')
-        thumbnail_url = get_thumbnail_url(course_url)
-        try:
-            Course.objects.create(
-                course_name=course_name, url=course_url, keywords=tags, description=description)
-        except Exception as e:
-            print(e)
+        # create a form instance and populate it with data from the request:
+        form = SuggestCourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            context = {'form': SuggestCourseForm(), 'success': 1}
+            return render(request, 'courses/suggest_course.html', context)
+    else:
+        form = SuggestCourseForm()
 
-    return render(request, 'courses/suggest_course.html')
+    return render(request, 'courses/suggest_course.html', {'form': form})

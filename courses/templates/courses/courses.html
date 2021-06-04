@@ -1,5 +1,6 @@
 {% extends 'courses/base.html' %}
 {% load static %}
+{% load social_share %}
 
 {% block content %}
 <main class="">
@@ -24,7 +25,7 @@
     <div class="d-flex justify-content-center align-items-center ">
         <div class="container grid-view">
             {% for course, is_favorite in courses.items %}
-            <div class="course-card position-relative ">
+            <div class="course-card position-relative " id="course_{{course.pk}}">
                 <a class="img-course" href="{{course.url}}">
                     <img src="{{course.thumbnail_url}}" alt="Course Image">
                 </a>
@@ -47,9 +48,38 @@
                         <a class="ms-3" href="{{course.url}}">
                             <button type="button" class="btn btn-info">Learn More</button>
                         </a>
-                        <a class="ms-3" href="">
-                            <button type="button" class="btn btn-info">Share <i class="fas fa-share-alt"></i></button>
-                        </a>
+                        <div class="ms-3">
+                            <!-- Button trigger modal -->
+                            <button type=" button" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#share-course">Share <i class="fas fa-share-alt"></i></button>
+
+                            <!-- Popup Share Modal -->
+                            <div class="modal fade" id="share-course" tabindex="-1"
+                                aria-labelledby="share-course-modal-label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered ">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-light" id="share-course-modal-label">Share this
+                                                course</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body ">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                {% post_to_facebook course.url " " "facebook-custom mx-3 " %}
+                                                {% post_to_twitter " " course.url " " "twitter-custom mx-3" %}
+                                                {% post_to_reddit " " course.url " " "reddit-custom mx-3 " %}
+                                                {% post_to_whatsapp course.url " " "whatsapp-custom mx-3 " %}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {% if request.user.is_authenticated %}
                         {% if is_favorite %}
                         <div class="text-warning ms-auto me-3 toggle-favorite" id="course-{{course.id}}"><i

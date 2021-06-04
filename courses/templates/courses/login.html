@@ -5,15 +5,17 @@
 
 
 
-<div class="container text-light mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
+<div class="container text-light py-2">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-lg-4 col d-flex justify-content-center ">
             <div class="login-wrap">
-                <div class=" d-flex justify-content-center mb-3">
+                <div class=" d-flex justify-content-center mb-0">
                     <img src="{% static 'courses/img/login.png' %}" alt="Login Logo" id="login-logo">
                 </div>
-                <h2 class="text-center mb-0">Welcome</h2>
-                <p class="text-center">Sign in by entering the information below</p>
+                <h2 class="text-center login-title pt-3 pb-md-1">Welcome
+                </h2>
+                <p class="text-center">Sign in with google</p>
+
                 <form class="form login-form" method="POST">{% csrf_token %}
                     <div class="form-group mb-3">
                         <div class="icon d-flex justify-content-center align-items-center"><span
@@ -38,7 +40,7 @@
                     {% endif %}
                     <div class="form-group">
                         <div class="w-100 d-flex justify-content-end mb-3 ">
-                            <a href="{% url 'courses:password_reset' %}">Forgot Password</a>
+                            <a href="{% url 'courses:password_reset' %}">Forgot Password?</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,7 +52,6 @@
                 <div class="w-100 text-center mt-4 text">
                     <p class="mb-0">Don't have an account?</p>
                     <div>
-
                         <a href="{% url 'courses:register' %}"><button class="btn btn-secondary">Sign Up</button></a>
 
                     </div>

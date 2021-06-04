@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User
+from django.forms import ModelForm
+from courses.models import Suggest_Course
 
 
 class UserCreationForm(UserCreationForm):
@@ -30,3 +32,16 @@ class UserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class SuggestCourseForm(ModelForm):
+    name = forms.CharField(label='Your Name', max_length=150)
+    email = forms.EmailField(label='Email', max_length=150)
+    course_name = forms.CharField(label='Course Name')
+    course_url = forms.URLField(label='Course URL')
+    description = forms.CharField(label="Description")
+
+    class Meta:
+        model = Suggest_Course
+        fields = ("name", "email",
+                  "course_name", "course_url", "description")

@@ -25,3 +25,14 @@ class Your_Course(models.Model):
 
     def __str__(self):
         return str(self.user) + ' - ' + str(self.course_id)
+
+
+class Suggest_Course(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField(max_length=150)
+    course_name = models.CharField(max_length=250)
+    course_url = models.URLField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.course_name

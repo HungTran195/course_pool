@@ -1,7 +1,7 @@
 const navbar = document.querySelector('.navbar');
 const navbar_toggler = document.querySelector('.navbar-toggler');
 const toggle_favorite_btn = document.querySelectorAll('.toggle-favorite');
-
+const input_field = document.querySelectorAll('input.form-control');
 const init = function () {
 
     let current_page = window.location.href.split('/');
@@ -24,6 +24,13 @@ const init = function () {
 
 }
 init();
+
+// Displace placeholder of input field if value is None
+for (let i = 0; i < input_field.length; i++) {
+    if (input_field[i].value == 'None') {
+        input_field[i].value = '';
+    }
+};
 
 // Focus navbar when menu is displayed in collapsed mode
 // as suggested by bootstrap5
