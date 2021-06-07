@@ -1,29 +1,8 @@
-const navbar = document.querySelector('.navbar');
+const nav_container = document.querySelector('.nav-container');
 const navbar_toggler = document.querySelector('.navbar-toggler');
 const toggle_favorite_btn = document.querySelectorAll('.toggle-favorite');
 const input_field = document.querySelectorAll('input.form-control');
-const init = function () {
 
-    let current_page = window.location.href.split('/');
-
-    const nav_container = document.querySelectorAll('.navbar-nav .navbar-text');
-    for (let i = 0; i < nav_container.length; i++) {
-        if (nav_container[i].classList.contains('active')) {
-            nav_container[i].classList.remove('active');
-        };
-    }
-    if (current_page.includes('suggest_course')) {
-        document.getElementById('suggest').classList.add('active');
-    }
-    else if (current_page.includes('favorite')) {
-        document.getElementById('favorite').classList.add('active');
-    }
-    else {
-        document.getElementById('home').classList.add('active');
-    }
-
-}
-init();
 
 // Displace placeholder of input field if value is None
 for (let i = 0; i < input_field.length; i++) {
@@ -94,3 +73,26 @@ for (let i = 0; i < toggle_favorite_btn.length; i++) {
     });
 }
 
+
+const init = function () {
+
+    let current_page = window.location.href.split('/');
+
+    const nav_container = document.querySelectorAll('.navbar-nav .navbar-text');
+    for (let i = 0; i < nav_container.length; i++) {
+        if (nav_container[i].classList.contains('active')) {
+            nav_container[i].classList.remove('active');
+        };
+    }
+    if (current_page.includes('suggest_course')) {
+        document.getElementById('suggest').classList.add('active');
+    }
+    else if (current_page.includes('favorite')) {
+        document.getElementById('favorite').classList.add('active');
+    }
+    else {
+        document.getElementById('home').classList.add('active');
+    }
+
+}
+init();

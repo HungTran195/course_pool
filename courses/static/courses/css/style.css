@@ -23,6 +23,11 @@ a {
     border-radius: 12px;
 }
 
+.text-name-login {
+    font-size: 1.1rem ;
+    color: #bcdeff;
+}
+
 /* Slogan */
 .slogan{
     display: flex;
@@ -107,8 +112,6 @@ a {
     font-weight: 500;
     margin: 10px 0;
     color: #f8f9fa;
-
-
 }
 
 .author {
@@ -117,9 +120,7 @@ a {
 
 .author-name {
     color: #eee;
-
-    font-weight: 500;
-        
+    font-weight: 500;        
 }
 
 .description {
@@ -134,42 +135,6 @@ a {
 
 .text-label{
     color: #97b4ce;
-}
-
-/* Dark mode */
-main.dark-mode{
-    background-color: #37474F;
-}
-
-.login.dark-mode {
-    background-color: #43A047;
-}
-
-.active.dark-mode{
-    background-color: #78909C;
-}
-
-.slogan.dark-mode {
-    background-color: #343a40;
-    color: #fff;
-}
-
-.course-card.dark-mode{
-    background-color: #182227;
-    color: #d6d6d6;
-    box-shadow: 5px 5px 5px #727b80;
-
-}
- 
-.course-card.dark-mode .course-name {
-    color: #fff;
-}
-.course-card.dark-mode .author-name {
-    color: #eee;
-}
-
-.dark-mode {
-    transition: all 0.4s ease;
 }
 
 /* Login form */
@@ -205,7 +170,6 @@ main.dark-mode{
 }
 .login-form .form-group {
     position: relative;
-    
 }
 
 .login-form input.form-control{
@@ -264,6 +228,7 @@ main.dark-mode{
     border-color: #b771ae;
 }
 
+/* Share box */
 .modal-content {
     width: fit-content;
 }
@@ -289,8 +254,22 @@ main.dark-mode{
 
 .whatsapp-custom {
     content: url('../img/whatsapp_logo.png');
-    max-width: 75px;
+    max-width: 70px;
 }
+
+/* Footer */
+.text-name-footter {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #bcdeff;
+}
+
+.seperate-line {
+    width: 100%;
+    border-top: 1px solid #8b8b8b;
+}
+
+
 
 @media (max-width: 768px){
     .active {
