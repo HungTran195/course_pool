@@ -1,6 +1,5 @@
-from django.utils.html import conditional_escape
 from .models import Course, Your_Course
-from courses.util import get_thumbnail_url
+from courses.util import get_courses
 from courses.form import UserCreationForm, SuggestCourseForm
 from django.contrib.auth.models import User
 
@@ -17,17 +16,7 @@ import json
 
 
 def index(request):
-    all_courses = {}
-
-    if request.user.is_authenticated:
-        favorite_id = [
-            c.course_id for c in Your_Course.objects.filter(user=request.user)]
-
-    for course in Course.objects.all():
-        all_courses[course] = False
-        if request.user.is_authenticated:
-            if course.id in favorite_id:
-                all_courses[course] = True
+    all_courses = get_courses(request, is_search=False)
 
     context = {'courses': all_courses}
     return render(request, 'courses/courses.html', context)
@@ -35,25 +24,25 @@ def index(request):
 
 def search_course(request):
     keyword = request.GET.get('key')
-    if not keyword.split():
-        all_courses = Course.objects.all()
+
+    if not keyword:
+        all_courses = get_courses(request, is_search=False)
         context = {'courses': all_courses}
         return render(request, 'courses/courses.html', context)
 
-    courses = Course.objects.filter(
-        Q(course_name__icontains=keyword) | Q(keywords__icontains=keyword))
+    keyword = " ".join(keyword.split())
+    print(keyword)
+    courses = get_courses(request, is_search=True, keyword=keyword)
+
     context = {'courses': courses, 'keyword': keyword}
 
     return render(request, 'courses/search.html', context)
 
 
 def category(request, key):
-    if key:
-        courses = Course.objects.filter(keywords__icontains=key)
-        context = {'courses': courses}
-    else:
-        all_courses = Course.objects.all()
-        context = {'courses': all_courses}
+    courses = get_courses(request, is_search=True, keyword=key)
+    context = {'courses': courses, 'tag': key}
+
     return render(request, 'courses/courses.html', context)
 
 
@@ -98,9 +87,11 @@ class RegisterPage(FormView):
 
 @ login_required(login_url='courses:login')
 def show_favorite(request):
+    favorite_courses = {}
     favorite_id = [
         c.course_id for c in Your_Course.objects.filter(user=request.user)]
-    favorite_courses = Course.objects.filter(id__in=favorite_id)
+    for c in Course.objects.filter(id__in=favorite_id):
+        favorite_courses[c] = True
     context = {'favorite_courses': favorite_courses}
     return render(request, 'courses/favorite.html', context)
 

@@ -79,11 +79,11 @@ a {
     padding: 0;
 }
 
-.keyword-list ul{
+.tag-list ul{
    padding-left: 10px;
 }
 
-.keyword-list ul li{
+.tag-list ul li{
     display: flex;
     text-align: center;
     justify-content: center;
@@ -93,11 +93,11 @@ a {
     border: 1px #ccc solid;
     border-radius: 16px;
 }
-.keyword-list ul li a {
+.tag-list ul li a {
     color: #ccc;
     font-size: 0.85rem;
 }
-.keyword-list ul li a:hover{   
+.tag-list ul li a:hover{   
     text-decoration: none; 
     font-size: 0.9rem;
     color: #fff;

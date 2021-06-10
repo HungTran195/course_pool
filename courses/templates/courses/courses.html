@@ -21,81 +21,19 @@
 </div>
 
 <!-- Main content -->
-<h2 class="text-light text-center py-4">Top picks from us!</h2>
-<div class="d-flex justify-content-center align-items-center pb-2">
-    <div class="container grid-view">
-        {% for course, is_favorite in courses.items %}
-        <div class="course-card position-relative " id="course_{{course.pk}}">
-            <a class="img-course" href="{{course.url}}" target="_blank">
-                <img src="{{course.thumbnail_url}}" alt="Course Image">
-            </a>
-            <div class="keyword-list">
-                <ul class="d-flex flex-wrap mt-1 mx-auto">
-                    {% for key in course.get_keywords%}
-                    <li>
-                        <a href="{% url 'courses:category' key%}">{{key}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="course-name">{{course.course_name}}</div>
-            <div class="author">by <span class="author-name">{{course.author}}</span></div>
-            <div class="description">
-                <p>{{course.description}}</p>
-            </div>
-            <div class="d-flex justify-content-center align-items-center my-3">
-                <div class='position-absolute bottom-0 my-2 d-flex align-items-center  w-100'>
-                    <a class="ms-3" href="{{course.url}}" target="_blank">
-                        <button type="button" class="btn btn-info">Learn More</button>
-                    </a>
-                    <div class="ms-3">
-                        <!-- Button trigger modal -->
-                        <button type=" button" class="btn btn-info" data-bs-toggle="modal"
-                            data-bs-target="#share-course-{{course.id}}">Share <i class="fas fa-share-alt"></i></button>
+{% if tag %}
 
-                        <!-- Popup Share Modal -->
-                        <div class="modal fade" id="share-course-{{course.id}}" tabindex="-1"
-                            aria-labelledby="share-course-modal-label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered ">
-                                <div class="modal-content bg-dark">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-light" id="share-course-modal-label">Share this
-                                            course</h5>
-                                    </div>
-                                    <div class="modal-body ">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            {% post_to_facebook course.url " " "facebook-custom mx-3 " %}
-                                            {% post_to_twitter " " course.url " " "twitter-custom mx-3" %}
-                                            {% post_to_reddit " " course.url " " "reddit-custom mx-3 " %}
-                                            {% post_to_whatsapp course.url " " "whatsapp-custom mx-2 " %}
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% if request.user.is_authenticated %}
-                    {% if is_favorite %}
-                    <div class="text-warning ms-auto me-3 toggle-favorite" id="course-{{course.id}}"><i
-                            class="fas fa-star fa-2x"></i>
-                    </div>
-                    {% else %}
-                    <div class="text-warning ms-auto me-3 toggle-favorite" id="course-{{course.id}}"><i
-                            class="far fa-star fa-2x"></i>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
+<div class="d-flex align-items-center justify-content-center pt-4 pb-2">
+    <h3 class="text-light ">Courses with tag: <span class="text-warning"> {{tag}} </span></h3>
 </div>
+
+{% else %}
+<h2 class="text-light text-center py-4">Top picks from us!</h2>
+
+{% endif %}
+
+{% include "courses/course_template.html" with courses=courses %}
+
 
 
 {% endblock %}

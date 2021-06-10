@@ -20,49 +20,7 @@
     {% else %}
 
     <div class="container grid-view">
-        {% for course in courses %}
-        <div class="course-card position-relative ">
-            <a class="img-course" href="{{course.url}}">
-                <img src="{{course.thumbnail_url}}" alt="Course Image">
-            </a>
-            <div class="keyword-list">
-                <ul class="d-flex flex-wrap mt-1 mx-auto">
-                    {% for key in course.get_keywords%}
-                    <li><a href="">{{key}}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="course-name">{{course.course_name}}</div>
-            <div class="author">by <span class="author-name">{{course.author}}</span></div>
-            <div class="description">
-                <p>{{course.description}}</p>
-            </div>
-            <div class="d-flex justify-content-center align-items-center my-3">
-                <div class='position-absolute bottom-0 my-2 d-flex align-items-center  w-100'>
-                    <a class="ms-3" href="{{course.url}}">
-                        <button type="button" class="btn btn-info">Learn More</button>
-                    </a>
-                    <a class="ms-3" href="">
-                        <button type="button" class="btn btn-info">Share <i class="fas fa-share-alt"></i></button>
-                    </a>
-                    {% if request.user.is_authenticated %}
-                    {% if is_favorite %}
-                    <a class="text-warning ms-auto me-3" href="">
-
-                        <button onclick="remove_from_favorite()">
-                            <i class=" fas fa-star fa-2x"></i>
-                        </button>
-                    </a>
-
-                    {% else %}
-                    <button class="text-warning ms-auto me-3" onclick="add_to_favorite()"><i
-                            class=" far fa-star fa-2x"></i></button>
-                    {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+        {% include "courses/course_template.html" with courses=courses %}
     </div>
     {% endif %}
 
