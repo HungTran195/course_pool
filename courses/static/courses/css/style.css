@@ -28,6 +28,10 @@ a {
     color: #bcdeff;
 }
 
+.logo {
+    max-width: 200px;
+}
+
 /* Slogan */
 .slogan{
     display: flex;
@@ -180,7 +184,7 @@ a {
     background-color:  rgb(0 0 0 / 2%) !important;
     color: #fff;
     -webkit-text-fill-color: #fff;
-    border-bottom: 1px solid #b689b0;
+    border-bottom: 1px solid #1fb075;
 
 }
 .login-form input:-webkit-autofill{
@@ -210,22 +214,22 @@ a {
 }
 
 .login-form a {
-    color: #b689b0;
+    color: #3cd396;
 }
 
 .login-form a:hover {
-    color: #b771ae;
+    color: #1fb075;
 }
 
 .login-form .btn.btn-primary {
-    background: #b689b0;
-    border: 1px solid #b689b0 ;
+    background: #3cd396;
+    border: 1px solid #3cd396 ;
     color: #fff ;
 }
 
 .login-form .btn.btn-primary:hover {
-    background-color: #b771ae;
-    border-color: #b771ae;
+    background-color: #1fb075;
+    border-color: #1fb075;
 }
 
 /* Share box */
@@ -261,7 +265,7 @@ a {
 .text-name-footter {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #bcdeff;
+    color: #1fb075;
 }
 
 .seperate-line {
@@ -293,6 +297,15 @@ a {
     .courses-container {
         margin: 0;
     }
+    .course-name {
+        font-size: 1.3rem;
+    }
+    .description p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    
     .grid-view {
         grid-gap: 1.5rem;
     }

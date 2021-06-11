@@ -12,6 +12,7 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'courses/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'courses/css/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'courses/img/favicon.ico' %}" />
 
     <title>{% block title %}Course Pool{% endblock %}</title>
 </head>
@@ -21,8 +22,8 @@
     <nav id="navbar">
 
         <div class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand flex-shrink-0 order-md-1 fs-2 fw-bolder ms-2" href="{% url 'courses:index' %}">Course
-                Pool</a>
+            <a class="navbar-brand flex-shrink-0 order-md-1 ms-2 me-1 d-flex justify-content-center align-items-center"
+                href="{% url 'courses:index' %}"><img class="logo" src="{% static 'courses/img/logo.png' %}" alt=""></a>
 
             <button class="navbar-toggler ms-auto order-md-3" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -78,7 +79,7 @@
     <footer>
         <div class="text-center text-light py-2">
             <p>Made with <span class="fas fa-heart px-1"></span> & <span class="fa fa-coffee px-1"></span>
-                by <span class="text-name-footter">Quoc Tran</span></p>
+                by <span class="text-name-footter">Hung Tran</span></p>
             <p class="mb-2">Want to see more projects like this? </p>
             <a class="text-light" href="https://github.com/QuocHung52" target="_blank"><i
                     class="fab fa-github fa-2x"></i></a>
