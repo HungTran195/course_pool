@@ -14,3 +14,4 @@ https://course-pool.herokuapp.com/
 2. Change ```DEBUG``` in course_pool/settings.py to ```True```
 3. Run this project: ``` python manage.py runserver ```
 
+#### New version of django - react: https://github.com/QuocHung52/course-pool-react
